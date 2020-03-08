@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "main_app/head.html" %}
+<body>
+    <h1>@{{ username }}</h1>
+    <h2>Report Details:</h2>
+    {% if tweets %}
+    <div>
+        <ul>
+            {% for key, value in report_details.items %}
+                <li><span><b>{{ key }}:</b></span> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <h2>Latest {{ tweets|length }} Tweets of @{{username}}: </h2>
+    <div>
+        <ul>
+            {% for tweet in tweets  %}
+                <li>{{ tweet.text }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <p>There is no enough data, please try with another account.</p>
+    {% endif %}
+</body>
+</html>

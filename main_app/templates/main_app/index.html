@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Twitter Positivity Meter</title>
-    </head>
-
+    {% include "main_app/head.html" %}
     <body>
         <h2>Twitter Positivity Meter</h2>
+        {% comment %} Messages Handeling  {% endcomment %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+
         <form action="get-tweets" method="post">
             {% csrf_token %}
-            <input type="search" name="search-twitter" id="">
+            <input type="search" name="twitter-username" id="twitter-username-search">
             <input type="submit" value="Search">
         </form>
-        {% if tweets %}
-            <div>
-                <ul>
-                    {% for tweet in tweets  %}
-                        <li>{{ tweet.text }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
     </body>
 </html>

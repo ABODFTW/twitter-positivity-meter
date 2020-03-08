@@ -17,15 +17,17 @@ This is a web app that identifies twitter accounts as being positive or negative
     - Natural Language Processing, Currently English only
     - Twitter Scraper/API
     - Basic Server Logic
-    - Database to store the twitter accounts and their scores
+  s- Database to store the twitter accounts and their scores
 - In the front-end:
     - A simple UI
     - Charts
 
 ## TODO:
-- Create the server logic
-- Create Twitter Scraper/API
-- Connect it to the server logic
-- Implement the NLP
-- Create the UI
-- Deploy
+
+- [x] Create the server logic
+- [x] Create Twitter Scraper/API
+- [x] Connect it to the server logic
+- [x] Implement the NLP
+- [] Create the UI
+- [] Optimize it by storing the data into DB
+- [] Deploy

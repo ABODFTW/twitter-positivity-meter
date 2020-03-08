@@ -1,0 +1,4 @@
+[flake8]
+ignore = E231
+exclude = .vscode, .git
+max-line-length = 88
