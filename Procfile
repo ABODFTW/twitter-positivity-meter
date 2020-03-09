@@ -1,1 +1,1 @@
-web: gunicorn twitter_positvity_meter.wsgi --log-file
+web: gunicorn twitter_positvity_meter.wsgi:application  --log-file - --log-level debug
