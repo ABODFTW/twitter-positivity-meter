@@ -51,7 +51,7 @@ def get_account_details(request, username):
                 "Most used Noun": report.get_most_used_words("NNP"),
                 "Most used Adjective": report.get_most_used_words("JJ"),
                 "Most used Verb": report.get_most_used_words("VB"),
-                "Average Score of Positivity": report.get_avg_positivity_score(),
+                "Positivity Score (100 to -100)": report.get_avg_positivity_score(),
             },
         }
         return render(request, "main_app/twitter-account-page.html", context=context)
