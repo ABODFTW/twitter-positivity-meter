@@ -25,7 +25,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        set SECRET_KEY="ib%z^i=@fann=4-@=f4p__7rf@w37fs=!u2@^2w(f%8vi08a@^" # This is only for testing, production version uses another key
+    - name: Setting Variables
+      run: |
+        SECRET_KEY="ib%z^i=@fann=4-@=f4p__7rf@w37fs=!u2@^2w(f%8vi08a@^" # This is only for testing, production version uses another key
     - name: Run Tests
       run: |
         python manage.py test
