@@ -12,11 +12,13 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-# Configure Django App for Heroku.
-import django_heroku
+
+def get_app_version(request):
+    return {"APP_VERSION": "1.0.0"}
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,9 +29,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get(
     "SECRET_KEY", "ib%z^i=@fann=4-@=f4p__7rf@w37fs=!u2@^2w(f%8vi08a@^"
 )
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -69,24 +68,13 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "twitter_positvity_meter.settings.config.get_app_version",
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = "twitter_positvity_meter.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -120,5 +108,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
-
-django_heroku.settings(locals())

@@ -1,8 +1,6 @@
 {% extends './default.html' %}
 
 {% block body %}
-    <h2>Twitter Positivity Meter</h2>
-    <span>Alpha Version</span>
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -14,11 +12,19 @@
 
     <form action="get-tweets" method="post">
         {% csrf_token %}
-        <input type="search" placeholder="@twitter_username" name="twitter-username" id="twitter-username-search">
-        <input class="waves-effect waves-light btn-large" style="display:block; width:100%" type="submit" value="Search">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">alternate_email</i>
+                <input type="search" id="icon_prefix" class="validate" name="twitter-username" id="twitter-username-search" autofocus>
+                <label for="icon_prefix">Twitter Username</label>
+            </div>
+            <button class="btn waves-effect waves-light col s12 light-blue lighten-2" type="submit" name="action">Submit
+                <i class="material-icons right">search</i>
+            </button>
+        </div>
     </form>
     <p>
-        Type a twitter username in the field above, and you will get a score of his
+        Type a twitter username in the field above, and you will get a score of the
         account positivity based on the last 100 tweets of the account, you will also
         get some other details, and the 100 tweets.
     </p>

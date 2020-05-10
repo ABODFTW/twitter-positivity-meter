@@ -12,3 +12,11 @@ class TwitterAccount(models.Model):
 
     def __str__(self):
         return self.account_name
+
+
+class Tweet(models.Model):
+    text = models.CharField(max_length=240)
+    username = models.ForeignKey(TwitterAccount, on_delete=models.CASCADE)
+    likes = models.IntegerField()
+    retweets = models.IntegerField()
+    date = models.DateTimeField()
