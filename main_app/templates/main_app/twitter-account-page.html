@@ -3,7 +3,7 @@
 <a href="/">Back</a>
 {% if tweets %}
 <h4><a href="http://www.twitter.com/{{username}}">@{{ username }}</a></h4>
-<h5>Top 10 most used words for the last {{ tweets | length }} tweets</h5>
+<h5>Most used words for the last {{ tweets | length }} tweets</h5>
 <div>
     <ul>
         {% for key, value in report_details.items %}
@@ -13,12 +13,13 @@
 </div>
 <div class="chart-container" style="position: relative; height:100%; width:100%">
     <canvas id="mostUsedWords"></canvas>
-    <h5>Top 10 words positivity score:</h5>
+    <h5>Top words positivity score:</h5>
     <canvas id="Bar"></canvas>
 </div>
 <div>
     <h5>Tweets:</h5>
     {% for tweet in tweets %}
+    {% if tweet.text %}
     <div class="row">
         <div class="col s12 m12">
             <div class="card light-blue white-text">
@@ -33,6 +34,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
