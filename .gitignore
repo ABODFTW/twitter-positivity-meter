@@ -135,3 +135,5 @@ notebooks/*
 
 # Visual Code config
 /.vscode
+TODO.md
+userflow.drawio
