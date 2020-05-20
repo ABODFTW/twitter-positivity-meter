@@ -21,9 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # In production will use a different key, then the hardcoded key
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY", "ib%z^i=@fann=4-@=f4p__7rf@w37fs=!u2@^2w(f%8vi08a@^"
-)
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 ALLOWED_HOSTS = []
 
