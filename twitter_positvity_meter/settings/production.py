@@ -1,4 +1,4 @@
-from twitter_positvity_meter.settings import config
+from twitter_positvity_meter.settings.config import *
 
 # Configure Django App for Heroku.
 import django_heroku
