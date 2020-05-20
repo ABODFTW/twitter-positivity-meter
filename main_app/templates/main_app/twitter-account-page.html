@@ -1,26 +1,112 @@
 {% extends './default.html' %}
-
 {% block body %}
-<a href="/">Home</a>
-<h1>@{{ username }}</h1>
-<h2>Report Details:</h2>
+<a href="/">Back</a>
 {% if tweets %}
+<h4><a href="http://www.twitter.com/{{username}}">@{{ username }}</a></h4>
+<h5>Top 10 most used words for the last {{ tweets | length }} tweets</h5>
 <div>
     <ul>
         {% for key, value in report_details.items %}
-            <li><span><b>{{ key }}:</b></span> {{ value }}</li>
+        <li><span><b>{{ key }}:</b></span> {{ value }}</li>
         {% endfor %}
     </ul>
 </div>
-<h2>Latest {{ tweets|length }} Tweets of @{{username}}: </h2>
+<div class="chart-container" style="position: relative; height:100%; width:100%">
+    <canvas id="mostUsedWords"></canvas>
+    <h5>Top 10 words positivity score:</h5>
+    <canvas id="Bar"></canvas>
+</div>
 <div>
-    <ul>
-        {% for tweet in tweets  %}
-            <li>{{ tweet.text }}</li>
-        {% endfor %}
-    </ul>
+    <h5>Tweets:</h5>
+    {% for tweet in tweets %}
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card light-blue white-text">
+                <div class="card-content">
+                    <p>{{tweet.text}}</p>
+                </div>
+                <div class="card-action">
+                    <b><a href="{{ tweet.permalink  }}">See it on twitter</a></b>
+                    Likes: {{ tweet.favorites }}
+                    <span class="right">{{ tweet.date  }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script>
+    let doughnut = document.getElementById('mostUsedWords').getContext('2d');
+    let Bar = document.getElementById('Bar').getContext('2d')
+    let words = {{ MUW | safe }};
+    let scores = {{ SCORES | safe}};
+
+    let DoughnutChart = new Chart(doughnut, {
+        type: 'doughnut',
+        data: {
+            labels: words[0],
+            datasets: [{
+                label: 'Most Used Words',
+                data: words[1],
+                backgroundColor: [
+                    '#0085FF',
+                    '#00C2FF',
+                    '#00FFB2',
+                    '#00FF47',
+                    '#ADFF00',
+                    '#DBFF00',
+                    '#FFD600',
+                    '#FFA800',
+                    '#FF5C00',
+                    '#FF0000',
+                ],
+                borderColor: [
+                    '#0085FF',
+                    '#00C2FF',
+                    '#00FFB2',
+                    '#00FF47',
+                    '#ADFF00',
+                    '#DBFF00',
+                    '#FFD600',
+                    '#FFA800',
+                    '#FF5C00',
+                    '#FF0000',
+                ],
+                borderWidth: 1
+            }],
+        },
+    });
+
+
+    var BarChart = new Chart(Bar, {
+        type: 'bar',
+        data: {
+            labels: ['Natural', 'Positive', 'Negative'],
+            datasets: [{
+                label: 'Words Count Based on Positivity for top 10 words',
+                data: [3, 5, 2],
+                backgroundColor: [
+                    '#FFD600',
+                    '#00FF47',
+                    '#FF0000',
+                ],
+            }],
+        },
+        options: {
+            scales: {
+                yAxes: [
+                    {
+                        ticks: {
+                            max: 10,
+                            min: 0
+                        }
+                    }]
+            }
+        }
+    });
+</script>
 {% else %}
-<p>There is no enough data, please try with another account.</p>
+<p>Data is insufficient, please try with another account.</p>
 {% endif %}
 {% endblock body %}

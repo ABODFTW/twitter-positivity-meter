@@ -1,31 +1,52 @@
 {% extends './default.html' %}
-
 {% block body %}
-    {% if messages %}
+<form action="get-tweets" method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">alternate_email</i>
+            <input type="search" id="icon_prefix" class="validate" name="twitter-username" id="twitter-username-search"
+                   autofocus>
+            <label for="icon_prefix">Twitter Username</label>
+        </div>
+        {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <li style="color:red;">{{message}}</li>
             {% endfor %}
         </ul>
-    {% endif %}
-
-
-    <form action="get-tweets" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">alternate_email</i>
-                <input type="search" id="icon_prefix" class="validate" name="twitter-username" id="twitter-username-search" autofocus>
-                <label for="icon_prefix">Twitter Username</label>
-            </div>
-            <button class="btn waves-effect waves-light col s12 light-blue lighten-2" type="submit" name="action">Submit
-                <i class="material-icons right">search</i>
-            </button>
-        </div>
-    </form>
+        {% endif %}
+        <button class="btn waves-effect waves-light col s12 blue lighten-1" type="submit" name="action"><b>Get
+                Results</b>
+        </button>
+    </div>
+</form>
+<div id="faq" style="margin-top: 5em;">
+    <h4>FAQ:</h4>
+    <h6><b>How to use it?</b></h6>
     <p>
         Type a twitter username in the field above, and you will get a score of the
-        account positivity based on the last 100 tweets of the account, you will also
-        get some other details, and the 100 tweets.
+        account positivity based on the top 10 words used by the account, and how many of the
+        10 words are natural, positive or negative.
     </p>
+    <h6><b>How many tweets will be analysed?</b></h6>
+    <p>
+        By default it analyses the last 100 tweets.
+    </p>
+    <h6><b>What tech stack did you use?</b></h6>
+    <p>
+        Python Django framework in the backend, Materlize.css and some custom CSS for styling the frontend and Chart.js
+        for the charts and textblob for words sentiment analysis and getting the tweets using getoldtweets3
+    </p>
+    <hr>
+    <h6><b>Disclaimer!</b></h6>
+    <p>
+        This software isn't related by anyway to twitter, and it was build for learning purposes only,
+        the software owner doesn't provide any support, and you agree to use the software as is without any guarantees.
+    </p>
+    <h6><b>How can I contact you?</b></h6>
+    <p>
+        You can find me on twitter at <a href="https://www.twitter.com/abod_ftw">Abod</a>
+    </p>
+</div>
 {% endblock body %}
