@@ -18,9 +18,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = False
 
 # deployment
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_REFERRER_POLICY = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_REFERRER_POLICY = True
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,13 +28,11 @@ SECURE_REFERRER_POLICY = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # In production will use a different key, then the hardcoded key
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY", "ib%z^i=@fann=4-@=f4p__7rf@w37fs=!u2@^2w(f%8vi08a@^"
-)
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 ALLOWED_HOSTS = []
 
-
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # Application definition
 
 INSTALLED_APPS = [
@@ -116,4 +114,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
 django_heroku.settings(locals())
